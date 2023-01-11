@@ -29,13 +29,15 @@ class Ball(Rectangle):
 
 
     def render(self):
-        glColor(0)
+        glColor(0,0.8,0,1)
         glBegin(GL_QUADS)
         glVertex2f(self.start_x, self.start_y + self.length)
         glVertex2f(self.start_x + self.width, self.start_y + self.length)
         glVertex2f(self.start_x + self.width, self.start_y)
         glVertex2f(self.start_x, self.start_y)
         glEnd()
+        glColor(0.3, 0.3, 0.3, 1)
+
     
     # def update(self):
     #     self.start_x = self.start_x + self.velocity_x
