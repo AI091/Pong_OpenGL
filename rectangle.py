@@ -10,7 +10,7 @@ class Rectangle:
         self.width = width
         self.length = length
 
-    def draw(self):
+    def render(self):
         glBegin(GL_QUADS)
         glVertex2f(self.start_x, self.start_y + self.length)
         glVertex2f(self.start_x + self.width, self.start_y + self.length)
