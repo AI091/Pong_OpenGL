@@ -18,6 +18,7 @@ class Game:
         self.player_one_score = 0
         self.player_two_score = 0
         self.game_state = GAME_START
+        self.game_mode = ACTIVE_MODE
 
 
     def collides_with_roof(self):
@@ -100,13 +101,25 @@ class Game:
         self.show_score()
 
     def update_ball(self):
-        if self.game_state == GAME_PLAYING:
+        if self.game_state == GAME_PLAYING :
             self.ball.start_x += self.ball.velocity_x
             self.ball.start_y += self.ball.velocity_y
             self.ball.velocity_x += (
                 (ACCELARATION) if self.ball.velocity_x > 0 else -ACCELARATION
-            )  # speedup the game as time goes on
+            )# speedup the game as time goes on
+
+    def cpu_play(self): 
         
+        ball_center_y = self.ball.start_y + self.ball.length/2 
+        cpu_center_y = self.right_paddle.start_y + self.right_paddle.length/2 
+
+        if cpu_center_y < ball_center_y : 
+            self.right_paddle.start_y += CPU_PLAYER_SPEED 
+        
+        elif cpu_center_y > ball_center_y : 
+            self.right_paddle.start_y -= CPU_PLAYER_SPEED 
+
+
     def play(self):
 
         if self.player_one_score == END_SCORE:
@@ -114,6 +127,9 @@ class Game:
 
         elif self.player_two_score == END_SCORE:
             self.game_state = PLAYER_TWO_WIN
+
+        if self.game_mode == SINGLE_PLAYER : 
+            self.cpu_play()
 
         self.render()
 
@@ -130,7 +146,6 @@ class Game:
             self.player_one_score += 1
             self.ball.spawn(1)
             sleep(SPAWN_DELAY)
-            print(self)
 
         elif self.collides_left_screen():
             self.player_two_score += 1

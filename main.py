@@ -69,7 +69,7 @@ def left_input(key, x, y):
 
 def right_input(key, x, y):
     if key == GLUT_KEY_UP:
-        if game.right_paddle.start_y + PADDLE_LENGTH + PADDLE_SPEED < WINDOW_LENGTH:
+        if game.right_paddle.start_y + PADDLE_LENGTH + PADDLE_SPEED <= WINDOW_LENGTH:
             game.right_paddle.start_y += PADDLE_SPEED
 
     elif key == GLUT_KEY_DOWN:

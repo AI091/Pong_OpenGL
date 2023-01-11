@@ -2,6 +2,9 @@ from rectangle import Rectangle
 from util import generate_angle
 from numpy import pi, cos, sin
 from config import *
+from OpenGL.GL import *
+from OpenGL.GLUT import *
+from OpenGL.GLU import *
 
 
 class Ball(Rectangle):
@@ -24,6 +27,16 @@ class Ball(Rectangle):
         self.init_velocity(direction)
         self.init_position()
 
+
+    def render(self):
+        glColor(0)
+        glBegin(GL_QUADS)
+        glVertex2f(self.start_x, self.start_y + self.length)
+        glVertex2f(self.start_x + self.width, self.start_y + self.length)
+        glVertex2f(self.start_x + self.width, self.start_y)
+        glVertex2f(self.start_x, self.start_y)
+        glEnd()
+    
     # def update(self):
     #     self.start_x = self.start_x + self.velocity_x
     #     self.start_y = self.start_y + self.velocity_y
